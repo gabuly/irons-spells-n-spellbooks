@@ -43,6 +43,16 @@ public class BlastwaveParticle extends TextureSheetParticle {
         this.bCol = options.getColor().z() * f;
         this.friction = 1;
     }
+//bugfix
+    @Override
+    public @NotNull AABB getBoundingBox() {
+        // Enlarge your particle's AABB to always include the camera
+        double r = 2.0; // radius
+        return new AABB(
+                this.x - r, this.y - 1, this.z - r,
+                this.x + r, this.y + 1, this.z + r
+        );
+    }
 
     @Override
     public float getQuadSize(float partialTick) {
